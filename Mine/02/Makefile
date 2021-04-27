@@ -25,9 +25,9 @@ run :
 	qemu-system-i386 helloos.img
 
 clean :
-	-del ipl.bin
-	-del ipl.lst
+	rm -rf ipl.bin
+	rm -rf ipl.lst
 
 src_only :
 	make clean
-	-del helloos.img
+	rm -rf helloos.img
