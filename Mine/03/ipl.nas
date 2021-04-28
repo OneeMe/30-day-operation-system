@@ -35,6 +35,22 @@ entry:
 		MOV		DS,AX
 		MOV		ES,AX
 
+; 读取磁盘
+
+		MOV		AX,0x0820
+		MOV		ES,AX
+		MOV		CH,0			; 柱面0
+		MOV		DH,0			; 磁头0
+		MOV		CL,2			; 扇区2
+
+		MOV     AH,0x02         ; AH=0x02, 读盘
+		MOV     AL,1            ; 1 个扇区
+		MOV     BX,0
+		MOV     DL,0x00         ; 第一个驱动器
+		INT     0x13            ; 调用读盘 BIOS
+		JC      error
+
+error:
 		MOV		SI,msg
 putloop:
 		MOV		AL,[SI]
